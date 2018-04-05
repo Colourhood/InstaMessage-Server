@@ -1,10 +1,12 @@
 const app = require('express')(),
       server = require('http').Server(app);
 
+const PORT = process.env.PORT || 8080;
+
 app.get('/', (request, response) => {
-      response.status(200).json({ Home: 'Colourhood presents the log database project' });
+      response.status(200).json({ Welcome: 'Colourhood presents the InstaMessage project' });
 });
 
-server.listen(7555, () => {
-      console.log('Server running on port 7555');
+server.listen(PORT, () => {
+      console.log(`Server running on port: ${PORT}`);
 });
