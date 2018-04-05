@@ -1,0 +1,14 @@
+{
+  "name": "instamessage-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Andrei Villasana",
+  "description": "A server for the InstaMessage App",
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "socket.io": "^2.0.4"
+  }
+}
