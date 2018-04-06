@@ -1,6 +1,6 @@
 const app = require('express')(),
       server = require('http').Server(app);
-
+const knex = require('knex')(require('./knexfile'))
 const PORT = process.env.PORT || 8080;
 
 app.get('/', (request, response) => {
