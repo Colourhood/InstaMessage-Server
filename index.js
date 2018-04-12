@@ -3,7 +3,7 @@ require('app-module-path').addPath(__dirname);
 const app = require('express')(),
     server = require('http').Server(app);
 const bodyParser = require('body-parser');
-const user = require('user/index');
+const user = require('userRouter/index');
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
