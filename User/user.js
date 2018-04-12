@@ -1,4 +1,5 @@
 const user = require('express').Router();
+const store = require('./store');
 
 user.post('/create', (request, response) => {
     store.createUser({

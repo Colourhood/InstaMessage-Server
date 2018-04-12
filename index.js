@@ -1,8 +1,9 @@
+require('app-module-path').addPath(__dirname);
+
 const app = require('express')(),
     server = require('http').Server(app);
 const bodyParser = require('body-parser');
-const store = (require('./store'));
-const user = require('./user');
+const user = require('./User/user');
 const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
