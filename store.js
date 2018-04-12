@@ -1,7 +1,8 @@
 const knex = require('knex')(require('./knexfile'));
 
 function createUser({username, password}) {
-	return knex('user').insert({ username, password });
+	console.log(`A new user was created ${username}`);
+	return knex('user').insert({ 'username': username, 'password': password });
 };
 
 function authenticate({username, password}) {

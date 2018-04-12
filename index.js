@@ -10,12 +10,8 @@ app.get('/', (request, response) => {
     response.status(200).json({ Welcome: 'Colourhood presents the InstaMessage project' });
 });
 app.post('/createUser', (request, response) => {
-    store
-        .createUser({
-            username: request.body.username,
-	    password: request.body.password
-        })
-	.then(() => response.sendStatus(200));
+    store.createUser({ username: request.body.username, password: request.body.password })
+		.then(() => response.sendStatus(200));
 });
 app.post('/login', (request, response) => {
     store
