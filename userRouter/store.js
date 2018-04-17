@@ -1,8 +1,10 @@
+const crypto = require('crypto');
 const knex = require('knex')(require('../knexfile'));
 
 function createUser({username, password}) {
 	console.log(`A new user was created ${username}`);
-	return knex('user').insert({ 'username': username, 'password': password });
+	const { salt, hash } = saltHashPassword(password);
+	return knex('user').insert({ 'username': username, 'salt': salt, 'encrypted_password': hash });
 };
 
 function authenticate({username, password}) {
@@ -12,9 +14,25 @@ function authenticate({username, password}) {
 			if (!user) {
 				return { success: false };
 			} else {
-				return { success: password === user.password };
+				const { hash } = saltHashPassword({ 
+					password,
+					salt: user.salt
+				});
+				return { success: hash === user.encrypted_password };
 			}
 		});
 };
 
-module.exports = { createUser, authenticate }
+function saltHashPassword({ password, salt = randomString() }) {
+	const hash = crypto.createHmac('sha512', salt)
+		.update(password);
+	return {
+		salt,
+		hash: hash.digest('hex')
+	};
+}
+function randomString() {
+	return crypto.randomBytes(4).toString('hex');
+}
+
+module.exports = { createUser, authenticate, saltHashPassword };
