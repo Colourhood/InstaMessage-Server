@@ -1,4 +1,4 @@
-const { saltHashPassword } = require('/userRouter/store');
+const { saltHashPassword } = require('userRouter/store');
 
 exports.up = function(knex, Promise) {
 	return knex.schema.table('user', t => {
