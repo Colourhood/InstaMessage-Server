@@ -1,16 +1,14 @@
 const { saltHashPassword } = require('../userRouter/store')
 
-exports.up = function(knex, Promise) {
-	return knex.schema.table('user', t => {
-		t.string('salt').defaultTo('default').notNullable()
-		t.string('encrypted_password').defaultTo('default').notNullable()
+exports.up = async function up (knex) {
+	await knex.schema.table('user', t => {
+		t.string('salt')
+		t.string('encrypted_password')
 	})
-	.then(() => knex('user'))
-	.then(users => Promise.all(users.map(convertPassword)))
-	.then(() => {
-		return knex.schema.table('user', t => {
-			t.dropColumn('password')
-		})
+	const users = await knex('user')	
+	await Promise.all(users.map(convertPassword))
+	await knex.schema.table('user', t => {
+		t.dropColumn('password')
 	})
 
 	function convertPassword (user) {
