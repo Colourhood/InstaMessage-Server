@@ -7,13 +7,13 @@ exports.up = async function up (knex) {
     t.dropColumn('password');
   });
   await knex.schema.alterTable('user', t => {
-    t.string("salt").nonNullable().alter();
-    t.string("encrypted_password").nonNullable().alter();
+    t.string('salt').nonNullable().alter();
+    t.string('encrypted_password').nonNullable().alter();
   });
 
-  function convertPassword (user){
+  function convertPassword (user) {
     const { salt, hash } = saltHashPassword(user.password);
-    return knex(user).where({ username: user.username })
+    return knex(user).where({ id: user.id })
       .update({
         salt,
         encrypted_password: hash
