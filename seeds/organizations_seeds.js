@@ -6,6 +6,9 @@ exports.seed = function(knex, Promise) {
   return knex('organization').del()
     .then(() => {
       // Inserts seed entries
-      return knex('organization').insert(organizationData);
+      return knex('organization').insert(organizationData)
+        .then(() => {
+          return Promise.all()
+        });
     });
 };

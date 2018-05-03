@@ -14,4 +14,4 @@ module.exports = [
         'hours': 'Mon, Tue, Wed, Thur, Fri, Sat, Sun',
         'services': '1, 3, 4'
     }
-]
+];
