@@ -5,7 +5,7 @@ Last Updated: 5/14/2018
 Root URL: http://insta-message.herokuapp.com  
   
 Title: Get All Organization Info  
-  URL: /organization/all  
+  + URL: /organization/all  
   Method: GET  
   URL Params: N/A  
   Data Params: N/A  
