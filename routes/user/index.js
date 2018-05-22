@@ -4,7 +4,9 @@ const store = require('./store');
 user.post('/create', (request, response) => {
     store.createUser({
       username: request.body.username,
-      password: request.body.password
+      password: request.body.password,
+      role: request.body.role,
+      organization: request.body.organization
     })
     .then(({ success }) => {
       if (success) {

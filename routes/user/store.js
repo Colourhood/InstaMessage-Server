@@ -1,13 +1,15 @@
 const crypto = require('crypto')
 const knex = require('knex')(require('../../knexfile'))
 
-function createUser({ username, password }) {
-	if (userExists({ username })) {
+function createUser({ username, password, role, organization }) {
+	if (userExists({ username }) === false) {
 		return Promise.resolve({ success: false })
 	}
 	console.log(`A new user was created ${username}`)
 	const { salt, hash } = saltHashPassword({ password })
-	return knex('user').insert({ 'username': username, 'salt': salt, 'encrypted_password': hash })
+	return knex('user').insert({ 'username': username, 'salt': salt, 'encrypted_password': hash,
+			'userId': crypto.createHmac('sha512', username).update(username).digest('hex'),
+		 	'role': role, 'organization': organization})
 		.then(() => {
 			return { success: true }
 		})
@@ -40,6 +42,7 @@ function randomString() {
 }
 
 function userExists({ username }) {
+	console.log(`${username}`)
 	return knex('user').where({ username })
 		.then(([user]) => {
 			if (!user) {
