@@ -6,7 +6,13 @@ user.post('/create', (request, response) => {
       username: request.body.username,
       password: request.body.password
     })
-    .then(() => response.sendStatus(200));
+    .then(({ success }) => {
+      if (success) {
+        response.sendStatus(200);
+      } else {
+        response.sendStatus(401);
+      }
+    })
 });
 
 user.post('/login', (request, response) => {
